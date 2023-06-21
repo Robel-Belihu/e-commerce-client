@@ -4,26 +4,7 @@ import { signout, isAuthenticated } from "../auth";
 import { itemTotal } from "./cartHelpers";
 
 import { fade, makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
-// import MenuItem from "@material-ui/core/MenuItem";
-// import Menu from "@material-ui/core/Menu";
-// import MenuIcon from "@material-ui/icons/Menu";
-import MoreIcon from "@material-ui/icons/MoreVert";
-
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import Button from "@material-ui/core/Button";
-// import HomeIcon from "@material-ui/icons/Home";
-import StorefrontIcon from "@material-ui/icons/Storefront";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import StoreIcon from "@material-ui/icons/Store";
 import LogoImg from "../assets/ecom-logo.png";
 
 import { HomeIcon, UserIcon } from "@heroicons/react/24/solid";
@@ -31,8 +12,8 @@ import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
 import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import { BuildingStorefrontIcon } from "@heroicons/react/24/solid";
 import { ArrowUturnRightIcon } from "@heroicons/react/24/solid";
-import { ArrowUturnLeftIcon } from "@heroicons/react/24/solid";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
+import { Badge } from "@material-ui/core";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
@@ -83,7 +64,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -175,7 +155,9 @@ const MaterialAppBar = ({ history }) => {
                     to="/cart"
                     className="flex justify-center items-center gap-3 text-gray-300 hover:bg-gray-700  px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    <ShoppingBagIcon className="h-6 w-6 text-blue-500" />
+                    <Badge badgeContent={itemTotal()}>
+                      <ShoppingBagIcon className="h-6 w-6 text-blue-500" />
+                    </Badge>
                     <Typography noWrap>Cart</Typography>
                   </Link>
                   <Link
