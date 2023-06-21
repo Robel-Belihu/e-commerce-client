@@ -26,11 +26,13 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import StoreIcon from "@material-ui/icons/Store";
 import LogoImg from "../assets/ecom-logo.png";
 
-import { HomeIcon } from "@heroicons/react/24/solid";
+import { HomeIcon, UserIcon } from "@heroicons/react/24/solid";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/solid";
 import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import { BuildingStorefrontIcon } from "@heroicons/react/24/solid";
 import { ArrowUturnRightIcon } from "@heroicons/react/24/solid";
+import { ArrowUturnLeftIcon } from "@heroicons/react/24/solid";
+import { UserPlusIcon } from "@heroicons/react/24/solid";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) {
@@ -194,18 +196,20 @@ const MaterialAppBar = ({ history }) => {
                   )}
                   {!isAuthenticated() && (
                     <Fragment>
-                      <Link style={isActive(history, "/signin")} to="/signin">
-                        <IconButton aria-label="Signin" color="inherit">
-                          <AccountCircleIcon />
-                          <Typography noWrap>Signin</Typography>
-                        </IconButton>
+                      <Link
+                        className="flex justify-center items-center gap-3 text-gray-300 hover:bg-gray-700  px-3 py-2 rounded-md text-sm font-medium"
+                        to="/signin"
+                      >
+                        <UserIcon className="h-6 w-6 text-blue-500" />
+                        <Typography noWrap>Signin</Typography>
                       </Link>
 
-                      <Link style={isActive(history, "/signup")} to="/signup">
-                        <IconButton aria-label="Signup" color="inherit">
-                          <PersonAddIcon />
-                          <Typography noWrap>Signup</Typography>
-                        </IconButton>
+                      <Link
+                        className="flex justify-center items-center gap-3 text-gray-300 hover:bg-gray-700  px-3 py-2 rounded-md text-sm font-medium"
+                        to="/signup"
+                      >
+                        <UserPlusIcon className="h-6 w-6 text-blue-500" />
+                        <Typography noWrap>Signup</Typography>
                       </Link>
                     </Fragment>
                   )}
