@@ -136,7 +136,7 @@ const MaterialAppBar = ({ history }) => {
             </div>
             <div className="flex-1 flex items-center justify-end sm:items-stretch sm:justify-end">
               <div className="hidden sm:block sm:ml-6">
-                <div className="flex space-x-4">
+                <div className="flex space-x-4 flex-wrap">
                   <Link
                     to="/"
                     className="flex justify-center items-center gap-3 text-gray-300 hover:bg-gray-700  px-3 py-2 rounded-md text-sm font-medium"
@@ -237,241 +237,81 @@ const MaterialAppBar = ({ history }) => {
         {isMobileMenuOpen && (
           <div className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <a
-                href="#home"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+              <Link
+                to="/"
+                className="flex item-center justify-center gap-3 text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
               >
-                Home
-              </a>
-              <a
-                href="#news"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                <HomeIcon className="h-6 w-6 text-blue-500" />
+                <Typography noWrap>Home</Typography>
+              </Link>
+              <Link
+                to="/shop"
+                className="flex item-center justify-center gap-3 text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
               >
-                News
-              </a>
-              <a
-                href="#option1"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                <BuildingStorefrontIcon className="h-6 w-6 text-blue-500" />
+                <Typography noWrap>Shop</Typography>
+              </Link>
+              <Link
+                to="/cart"
+                className="flex item-center justify-center gap-3 text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
               >
-                Option 1
-              </a>
-              <a
-                href="#option2"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                <Badge badgeContent={itemTotal()}>
+                  <ShoppingBagIcon className="h-6 w-6 text-blue-500" />
+                </Badge>
+                <Typography noWrap>Cart</Typography>
+              </Link>
+              <Link
+                to="/user/dashboard"
+                className="flex item-center justify-center gap-3 text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
               >
-                Option 2
-              </a>
-              <a
-                href="#option2"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-              >
-                Option 2
-              </a>
+                <AdjustmentsHorizontalIcon className="h-6 w-6 text-blue-500" />
+                <Typography noWrap>Dashboard</Typography>
+              </Link>
+              {isAuthenticated() && isAuthenticated().user.role === 1 && (
+                <Link
+                  className="flex item-center justify-center gap-3 text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  to="/admin/dashboard"
+                >
+                  <AdjustmentsHorizontalIcon className="h-6 w-6 text-blue-500" />
+                  <Typography>Admin</Typography>
+                </Link>
+              )}
+              {!isAuthenticated() && (
+                <Fragment>
+                  <Link
+                    className="flex item-center justify-center gap-3 text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    to="/signin"
+                  >
+                    <UserIcon className="h-6 w-6 text-blue-500" />
+                    <Typography noWrap>Signin</Typography>
+                  </Link>
+
+                  <Link
+                    className="flex item-center justify-center gap-3 text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                    to="/signup"
+                  >
+                    <UserPlusIcon className="h-6 w-6 text-blue-500" />
+                    <Typography noWrap>Signup</Typography>
+                  </Link>
+                </Fragment>
+              )}
+              {isAuthenticated() && (
+                <span
+                  className="flex item-center justify-center gap-3 text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  onClick={() =>
+                    signout(() => {
+                      history.push("/");
+                    })
+                  }
+                >
+                  <ArrowUturnRightIcon className="h-6 w-6 text-blue-500" />
+                  <Typography noWrap>Logout</Typography>
+                </span>
+              )}
             </div>
           </div>
         )}
       </nav>
-      {/* <div position="fixed">
-        <div class="flex space-x-4 bg-purple-400 items-center justify-between">
-          <a
-            className="md:p-2"
-            href="/"
-            style={{ color: "#ffffff", textDecoration: "none" }}
-          >
-            <img src={LogoImg} height={60} width={60} alt="" />
-          </a>
-          <div className="md:flex hidden">
-            <Link style={isActive(history, "/")} to="/">
-              <IconButton color="inherit">
-                <HomeIcon />
-                <Typography noWrap>Home</Typography>
-              </IconButton>
-            </Link>
-            <Link style={isActive(history, "/shop")} to="/shop">
-              <IconButton aria-label="Shop" color="inherit">
-                <StorefrontIcon />
-                <Typography noWrap>Shop</Typography>
-              </IconButton>
-            </Link>
-            <Link style={isActive(history, "/cart")} to="/cart">
-              <IconButton aria-label="Cart" color="inherit">
-                <Badge badgeContent={itemTotal()} color="secondary">
-                  <ShoppingCartIcon />
-                </Badge>
-                <Typography noWrap>Cart</Typography>
-              </IconButton>
-            </Link>
-            {isAuthenticated() && isAuthenticated().user.role === 0 && (
-              <Link
-                style={isActive(history, "/user/dashboard")}
-                to="/user/dashboard"
-              >
-                <IconButton aria-label="Dashboard" color="inherit">
-                  <DashboardIcon />
-                  <Typography noWrap>Dashboard</Typography>
-                </IconButton>
-              </Link>
-            )}
-            {isAuthenticated() && isAuthenticated().user.role === 1 && (
-              <Link
-                style={isActive(history, "/admin/dashboard")}
-                to="/admin/dashboard"
-              >
-                <IconButton aria-label="Dashboard" color="inherit">
-                  <DashboardIcon />
-                  <Typography noWrap>Dashboard</Typography>
-                </IconButton>
-              </Link>
-            )}
-            {!isAuthenticated() && (
-              <Fragment>
-                <Link style={isActive(history, "/signin")} to="/signin">
-                  <IconButton aria-label="Signin" color="inherit">
-                    <AccountCircleIcon />
-                    <Typography noWrap>Signin</Typography>
-                  </IconButton>
-                </Link>
-
-                <Link style={isActive(history, "/signup")} to="/signup">
-                  <IconButton aria-label="Signup" color="inherit">
-                    <PersonAddIcon />
-                    <Typography noWrap>Signup</Typography>
-                  </IconButton>
-                </Link>
-              </Fragment>
-            )}
-            {isAuthenticated() && (
-              <span
-                style={{ cursor: "pointer", color: "#ffffff" }}
-                onClick={() =>
-                  signout(() => {
-                    history.push("/");
-                  })
-                }
-              >
-                <IconButton aria-label="Signout" color="inherit">
-                  <ExitToAppIcon />
-                  <Typography noWrap>Signout</Typography>
-                </IconButton>
-              </span>
-            )}
-            <div className="md:bg-purple-400 hidden md:flex md:flex-col">
-              <button
-                type="button"
-                class="inline-flex text-white w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 "
-                id="menu-button"
-              >
-                Options
-                <svg
-                  class="-mr-1 h-5 w-5 text-gray-400"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </button>
-              <div className="flex flex-col">
-                <Link style={isActive(history, "/")} to="/">
-                  <IconButton aria-label="Home" color="inherit">
-                    <HomeIcon />
-                    <Typography noWrap>Home</Typography>
-                  </IconButton>
-                </Link>
-
-                <Link style={isActive(history, "/shop")} to="/shop">
-                  <IconButton aria-label="Shop" color="inherit">
-                    <StorefrontIcon />
-                    <Typography noWrap>Shop</Typography>
-                  </IconButton>
-                </Link>
-
-                <Link style={isActive(history, "/cart")} to="/cart">
-                  <IconButton aria-label="Cart" color="inherit">
-                    <Badge badgeContent={itemTotal()} color="secondary">
-                      <ShoppingCartIcon />
-                    </Badge>
-                    <Typography noWrap>Cart</Typography>
-                  </IconButton>
-                </Link>
-
-                {isAuthenticated() && isAuthenticated().user.role === 0 && (
-                  <Link
-                    style={isActive(history, "/user/dashboard")}
-                    to="/user/dashboard"
-                  >
-                    <IconButton aria-label="Dashboard" color="inherit">
-                      <DashboardIcon />
-                      <Typography noWrap>Dashboard</Typography>
-                    </IconButton>
-                  </Link>
-                )}
-
-                {isAuthenticated() && isAuthenticated().user.role === 1 && (
-                  <Link
-                    style={isActive(history, "/admin/dashboard")}
-                    to="/admin/dashboard"
-                  >
-                    <IconButton aria-label="Dashboard" color="inherit">
-                      <DashboardIcon />
-                      <Typography noWrap>Dashboard</Typography>
-                    </IconButton>
-                  </Link>
-                )}
-
-                {!isAuthenticated() && (
-                  <Fragment>
-                    <Link style={isActive(history, "/signin")} to="/signin">
-                      <IconButton aria-label="Signin" color="inherit">
-                        <AccountCircleIcon />
-                        <Typography noWrap>Signin</Typography>
-                      </IconButton>
-                    </Link>
-
-                    <Link style={isActive(history, "/signup")} to="/signup">
-                      <IconButton aria-label="Signup" color="inherit">
-                        <PersonAddIcon />
-                        <Typography noWrap>Signup</Typography>
-                      </IconButton>
-                    </Link>
-                  </Fragment>
-                )}
-
-                {isAuthenticated() && (
-                  <span
-                    style={{ cursor: "pointer", color: "#ffffff" }}
-                    onClick={() =>
-                      signout(() => {
-                        history.push("/");
-                      })
-                    }
-                  >
-                    <IconButton aria-label="Signout" color="inherit">
-                      <ExitToAppIcon />
-                      <Typography noWrap>Signout</Typography>
-                    </IconButton>
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className={classes.sectionMobile}>
-          <IconButton
-            aria-label="show more"
-            aria-haspopup="true"
-            onClick={handleMobileMenuOpen}
-            color="inherit"
-          >
-            <MoreIcon />
-          </IconButton>
-        </div>
-      </div> */}
     </div>
   );
 };
