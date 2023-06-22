@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import Layout from './Layout';
-import { getCart } from './cartHelpers';
-import Card from './Card';
-import Checkout from './Checkout';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import Layout from "./Layout";
+import { getCart } from "./cartHelpers";
+import Card from "./Card";
+import Checkout from "./Checkout";
 
-import Copyright from './Copyright';
+import Copyright from "./Copyright";
 
 const Cart = () => {
   const [items, setItems] = useState([]);
@@ -18,8 +18,15 @@ const Cart = () => {
   const showItems = (items) => {
     return (
       <div>
-        <h2>Your cart has {`${items.length}`} items</h2>
-        <hr />
+        <h2 className="font-semibold text-xl">
+          Your cart has
+          <span className="text-red-700 font-bold text-2xl">
+            {" "}
+            {`${items.length}`}{" "}
+          </span>
+          items
+        </h2>
+        <hr className="mb-4" />
         {items.map((product, i) => (
           <Card
             key={i}
@@ -37,27 +44,25 @@ const Cart = () => {
 
   const noItemsMessage = () => (
     <h2>
-      Your cart is empty. <br /> <Link to='/shop'>Continue shopping</Link>
+      Your cart is empty. <br /> <Link to="/shop">Continue shopping</Link>
     </h2>
   );
 
   return (
     <Layout
-      title='Shopping Cart'
-      description='Manage your cart items. Add remove checkout or continue shopping.'
-      className='container-fluid'
+      title="Shopping Cart"
+      description="Manage your cart items. Add remove checkout or continue shopping."
+      className="flex flex-col justify-center "
     >
-      <div className='row'>
-        <div className='col-md-2'></div>
-        <div className='col-md-4'>
+      <div className="flex flex-col md:flex-row justify-center">
+        <div className="">
           {items.length > 0 ? showItems(items) : noItemsMessage()}
         </div>
-        <div className='col-md-4'>
-          <h2 className='mb-4'>Your cart summary</h2>
-          <hr />
+        <div className="flex flex-col bg-amber-500 p-4 h-2/5 rounded-md m-4">
+          <h2 className="font-semibold text-xl">Your cart summary</h2>
+          <hr className="mb-4" />
           <Checkout products={items} setRun={setRun} run={run} />
         </div>
-        <div className='col-md-2'></div>
       </div>
       <Copyright />
     </Layout>

@@ -5,7 +5,7 @@ import "../styles.css";
 const Layout = ({
   title = "Title",
   description = "Description",
-  className,
+  className = "flex flex-col",
   children,
 }) => (
   <div>

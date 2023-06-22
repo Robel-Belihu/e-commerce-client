@@ -4,7 +4,7 @@ import ShowImage from "./ShowImage";
 import moment from "moment";
 
 import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import CameraIcon from "@material-ui/icons/PhotoCamera";
 import CardM from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -30,9 +30,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
   },
-  heroButtons: {
-    marginTop: theme.spacing(4),
-  },
+
   cardGrid: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
@@ -63,8 +61,8 @@ const Card = ({
   showAddToCartButton = true,
   cartUpdate = false,
   showRemoveProductButton = false,
-  setRun = (f) => f, // default value of function
-  run = undefined, // default value of undefined
+  setRun = (f) => f,
+  run = undefined,
 }) => {
   const [redirect, setRedirect] = useState(false);
   const [count, setCount] = useState(product.count);
@@ -74,9 +72,9 @@ const Card = ({
     return (
       showViewProductButton && (
         <Link href={`/product/${product._id}`} className="mr-2">
-          <Button variant="contained" color="primary">
+          <button className="text-white bg-amber-500 hover:bg-amber-400 py-1 px-2 rounded-md text-l font-semibold">
             View Product
-          </Button>
+          </button>
         </Link>
       )
     );
@@ -95,9 +93,12 @@ const Card = ({
   const showAddToCartBtn = (showAddToCartButton) => {
     return (
       showAddToCartButton && (
-        <Button onClick={addToCart} variant="outlined" color="secondary">
+        <button
+          onClick={addToCart}
+          className="text-white bg-green-500 hover:bg-green-400 py-1 px-2 rounded-md text-l font-semibold"
+        >
           Add to cart
-        </Button>
+        </button>
       )
     );
   };
@@ -141,18 +142,17 @@ const Card = ({
   const showRemoveButton = (showRemoveProductButton) => {
     return (
       showRemoveProductButton && (
-        <Button
+        <button
           onClick={() => {
             removeItem(product._id);
             setRun(!run);
           }}
           variant="contained"
-          color="secondary"
-          className={classes.button}
+          className="text-white bg-red-500 hover:bg-red-400 py-1 px-2 rounded-md text-l font-semibold mt-2"
           startIcon={<DeleteIcon />}
         >
           Remove Product
-        </Button>
+        </button>
       )
     );
   };
@@ -162,50 +162,28 @@ const Card = ({
   return (
     <Container className="">
       <CssBaseline />
-      <div className="bg-amber-100 container rounded-md">
-        <div>
-          <div class="max-w-sm rounded overflow-hidden shadow-lg p-2">
-            {/* <img class="w-full" src="product" alt="Sunset in the mountains" /> */}
-            <ShowImage item={product} url="product" />
-            <div class="px-6 py-4">
-              <div class="font-bold text-xl mb-2"> {product.name}</div>
-              <p class="text-gray-700 text-base">
-                {product.description.substring(0, 100)}
-              </p>
-            </div>
-            <p className="font-semibold ">Price: ${product.price}</p>
-            <p className="text-lg font-semibold text-purple-700">
-              Category: {product.category && product.category.name}
-            </p>
-            <div class="px-6 pt-4 pb-2"></div>
+      <div className="w-60 md:w-72 lg:96 bg-white rounded-lg overflow-hidden shadow-lg">
+        {shouldRedirect(redirect)}
+        <ShowImage item={product} url="product" />
+        <div className="p-4">
+          <h2 className="text-xl font-bold mb-2">{product.name}</h2>
+          <p className="text-gray-700 text-sm mb-4">
+            {product.description.substring(0, 100)}
+          </p>
+          <p className="text-black-10 mb-2">Price: ${product.price}</p>
+          <p className="text-black-9 mb-2">
+            Category: {product.category && product.category.name}
+          </p>
+          <p className="text-black-8 mb-2">
+            Added on {moment(product.createdAt).fromNow()}
+          </p>
+          {showStock(product.quantity)}
+          <div className="mt-4">
+            {showViewButton(showViewProductButton)}
+            {showAddToCartBtn(showAddToCartButton)}
+            {showRemoveButton(showRemoveProductButton)}
           </div>
-          {/* <CardM className={classes.card}>
-            {shouldRedirect(redirect)}
-            <ShowImage item={product} url="product" />
-            <CardContent className={classes.cardContent}>
-              <Typography gutterBottom variant="h5" component="h2">
-                {product.name}
-              </Typography>
-              <Typography className={classes.productDescription}>
-                {product.description.substring(0, 100)}
-              </Typography>
-              <p className="black-10">Price: ${product.price}</p>
-              <p className="black-9">
-                Category: {product.category && product.category.name}{" "}
-              </p>{" "}
-              <p className="black-8">
-                Added on {moment(product.createdAt).fromNow()}{" "}
-              </p>
-              {showStock(product.quantity)}
-              <br></br>
-              <span>
-                {showViewButton(showViewProductButton)}
-                {showAddToCartBtn(showAddToCartButton)}
-                {showRemoveButton(showRemoveProductButton)}
-              </span>
-              {showCartUpdateOptions(cartUpdate)}
-            </CardContent>
-          </CardM> */}
+          {showCartUpdateOptions(cartUpdate)}
         </div>
       </div>
     </Container>
