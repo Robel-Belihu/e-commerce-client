@@ -206,7 +206,7 @@ const MaterialAppBar = ({ history }) => {
                       to="/signin"
                     >
                       <UserIcon className="h-6 w-6 text-blue-500" />
-                      <Typography className="hidden md:block" noWrap>
+                      <Typography className="hidden lg:block" noWrap>
                         Signin
                       </Typography>
                     </Link>

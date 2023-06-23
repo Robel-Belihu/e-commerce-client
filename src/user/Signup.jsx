@@ -87,8 +87,12 @@ export default function Signup() {
 
   const showSuccess = () => (
     // the following should be displayed upon account creation
-    <div>
-      New account is created. Please <Link to="/signin">Signin</Link>.
+    <div className="alert alert-success">
+      New account is created. Please{" "}
+      <Link className="text-blue-700 font-semibold" to="/signin">
+        Sign in
+      </Link>
+      .
     </div>
   );
 
@@ -96,11 +100,11 @@ export default function Signup() {
 
   const signUpForm = () => (
     <Container component="main" maxWidth="xs">
-      {showSuccess()}
-      {showError()}
+      {success && showSuccess()}
+      {error && showError()}
       <div className={classes.paper}>
         <LockOutlinedIcon />
-        <h6>Sign up</h6>
+        <h6>Signup</h6>
 
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -161,7 +165,8 @@ export default function Signup() {
           <Grid container justify="flex-end">
             <Grid item>
               <Link to="/signin" variant="body2">
-                Already have an account? Sign in
+                Already have an account?{" "}
+                <span className="text-blue-700 font-semibold">Sign in</span>
               </Link>
             </Grid>
           </Grid>
@@ -171,9 +176,13 @@ export default function Signup() {
   );
 
   return (
-    <div>
+    <Layout
+      title="Signup page"
+      description="Signup to MERN E-commerce App"
+      className="container col-md-8 offset-md-2"
+    >
       {signUpForm()}
       <Copyright />
-    </div>
+    </Layout>
   );
 }
