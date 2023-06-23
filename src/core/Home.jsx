@@ -39,29 +39,26 @@ const Home = () => {
   return (
     <Layout>
       <Search />
-      <div class="flex">
-        <div className="flex w-full flex-col">
-          <h2 className="font-semibold text-xl mb-3">New Arrivals</h2>
-          <div className="row">
-            {productsByArrival.map((product, i) => (
-              <div key={i} className="">
-                <Card product={product} />
-              </div>
-            ))}
-          </div>
+      <div className="flex w-full flex-col">
+        <h2 className="font-semibold text-xl mb-3">New Arrivals</h2>
+        <div className="flex flex-wrap justify-around">
+          {productsByArrival.map((product, i) => (
+            <div key={i} className="">
+              <Card product={product} />
+            </div>
+          ))}
+        </div>
 
-          <h2 className="font-semibold text-xl mb-3">Best Sellers</h2>
-          <div className="row">
-            {productsBySell.map((product, i) => (
-              <div key={i} className="">
-                <Card product={product} />
-              </div>
-            ))}
-          </div>
+        <h2 className="font-semibold text-xl mb-3">Best Sellers</h2>
+        <div className="flex flex-wrap justify-around">
+          {productsBySell.map((product, i) => (
+            <div key={i}>
+              <Card product={product} />
+            </div>
+          ))}
         </div>
       </div>
-
-      {/* <Copyright /> */}
+      <Copyright />
     </Layout>
   );
 };
