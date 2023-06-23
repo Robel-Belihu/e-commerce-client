@@ -61,7 +61,7 @@ const Home = () => {
         </div>
       </div>
 
-      <Copyright />
+      {/* <Copyright /> */}
     </Layout>
   );
 };

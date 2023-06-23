@@ -157,14 +157,18 @@ const MaterialAppBar = ({ history }) => {
                   className="flex justify-center items-center gap-3 text-gray-300 hover:bg-gray-700  px-3 py-2 rounded-md text-sm font-medium"
                 >
                   <HomeIcon className="h-6 w-6 text-blue-500" />
-                  <Typography noWrap>Home</Typography>
+                  <Typography className="hidden lg:block" noWrap>
+                    Home
+                  </Typography>
                 </Link>
                 <Link
                   to="/shop"
                   className="flex justify-center items-center gap-3 text-gray-300 hover:bg-gray-700  px-3 py-2 rounded-md text-sm font-medium"
                 >
                   <BuildingStorefrontIcon className="h-6 w-6 text-blue-500" />
-                  <Typography noWrap>Shop</Typography>
+                  <Typography className="hidden md:block" noWrap>
+                    Shop
+                  </Typography>
                 </Link>
                 <Link
                   to="/cart"
@@ -173,14 +177,18 @@ const MaterialAppBar = ({ history }) => {
                   <Badge badgeContent={itemTotal()}>
                     <ShoppingBagIcon className="h-6 w-6 text-blue-500" />
                   </Badge>
-                  <Typography noWrap>Cart</Typography>
+                  <Typography className="hidden md:block" noWrap>
+                    Cart
+                  </Typography>
                 </Link>
                 <Link
                   to="/user/dashboard"
                   className="flex justify-center items-center gap-3 text-gray-300 hover:bg-gray-700  px-3 py-2 rounded-md text-sm font-medium"
                 >
                   <AdjustmentsHorizontalIcon className="h-6 w-6 text-blue-500" />
-                  <Typography noWrap>Dashboard</Typography>
+                  <Typography className="hidden md:block" noWrap>
+                    Dashboard
+                  </Typography>
                 </Link>
                 {isAuthenticated() && isAuthenticated().user.role === 1 && (
                   <Link
@@ -188,7 +196,7 @@ const MaterialAppBar = ({ history }) => {
                     to="/admin/dashboard"
                   >
                     <AdjustmentsHorizontalIcon className="h-6 w-6 text-blue-500" />
-                    <Typography>Admin</Typography>
+                    <Typography className="hidden md:block">Admin</Typography>
                   </Link>
                 )}
                 {!isAuthenticated() && (
@@ -198,7 +206,9 @@ const MaterialAppBar = ({ history }) => {
                       to="/signin"
                     >
                       <UserIcon className="h-6 w-6 text-blue-500" />
-                      <Typography noWrap>Signin</Typography>
+                      <Typography className="hidden md:block" noWrap>
+                        Signin
+                      </Typography>
                     </Link>
 
                     <Link
@@ -206,7 +216,9 @@ const MaterialAppBar = ({ history }) => {
                       to="/signup"
                     >
                       <UserPlusIcon className="h-6 w-6 text-blue-500" />
-                      <Typography noWrap>Signup</Typography>
+                      <Typography className="hidden md:block" noWrap>
+                        Signup
+                      </Typography>
                     </Link>
                   </Fragment>
                 )}
@@ -220,7 +232,9 @@ const MaterialAppBar = ({ history }) => {
                     }
                   >
                     <ArrowUturnRightIcon className="h-6 w-6 text-blue-500" />
-                    <Typography noWrap>Logout</Typography>
+                    <Typography className="hidden lg:block" noWrap>
+                      Logout
+                    </Typography>
                   </span>
                 )}
               </div>
