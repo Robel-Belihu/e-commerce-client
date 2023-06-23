@@ -40,7 +40,7 @@ const Home = () => {
     <Layout>
       <Search />
       <div class="flex">
-        <div className="flex justify-center items-center flex-col">
+        <div className="flex w-full flex-col">
           <h2 className="font-semibold text-xl mb-3">New Arrivals</h2>
           <div className="row">
             {productsByArrival.map((product, i) => (

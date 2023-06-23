@@ -95,7 +95,7 @@ const Card = ({
       showAddToCartButton && (
         <button
           onClick={addToCart}
-          className="text-white bg-green-500 hover:bg-green-400 py-1 px-2 rounded-md text-l font-semibold"
+          className="text-white bg-green-500 hover:bg-green-400 py-1 px-2 rounded-md text-l md:mt-0 mt-2 font-semibold"
         >
           Add to cart
         </button>
@@ -162,7 +162,7 @@ const Card = ({
   return (
     <Container className="">
       <CssBaseline />
-      <div className="w-60 md:w-72 lg:96 bg-white rounded-lg overflow-hidden shadow-lg">
+      <div className="w-60 md:w-72 lg:96 bg-white rounded-lg overflow-hidden shadow-lg mb-4">
         {shouldRedirect(redirect)}
         <ShowImage item={product} url="product" />
         <div className="p-4">

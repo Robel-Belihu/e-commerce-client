@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import Layout from '../core/Layout';
-import { isAuthenticated } from '../auth';
-import { Link } from 'react-router-dom';
-import { getPurchaseHistory } from './apiUser';
-import moment from 'moment';
+import React, { useState, useEffect } from "react";
+import Layout from "../core/Layout";
+import { isAuthenticated } from "../auth";
+import { Link } from "react-router-dom";
+import { getPurchaseHistory } from "./apiUser";
+import moment from "moment";
 
 const Dashboard = () => {
   const [history, setHistory] = useState([]);
@@ -30,16 +30,16 @@ const Dashboard = () => {
 
   const userLinks = () => {
     return (
-      <div className='card'>
-        <h4 className='card-header'>User links</h4>
-        <ul className='list-group'>
-          <li className='list-group-item'>
-            <Link className='nav-link' to='/cart'>
+      <div className="card">
+        <h4 className="card-header">User links</h4>
+        <ul className="list-group">
+          <li className="list-group-item">
+            <Link className="nav-link" to="/cart">
               My cart
             </Link>
           </li>
-          <li className='list-group-item'>
-            <Link className='nav-link' to={`/profile/${_id}`}>
+          <li className="list-group-item">
+            <Link className="nav-link" to={`/profile/${_id}`}>
               Update profile
             </Link>
           </li>
@@ -50,13 +50,13 @@ const Dashboard = () => {
 
   const userInfo = () => {
     return (
-      <div className='card mb-5'>
-        <h3 className='card-header'>User information</h3>
-        <ul className='list-group'>
-          <li className='list-group-item'>{name}</li>
-          <li className='list-group-item'>{email}</li>
-          <li className='list-group-item'>
-            {role === 1 ? 'Admin' : 'Registered user'}
+      <div className="card mb-5">
+        <h3 className="card-header">User information</h3>
+        <ul className="list-group">
+          <li className="list-group-item">{name}</li>
+          <li className="list-group-item">{email}</li>
+          <li className="list-group-item">
+            {role === 1 ? "Admin" : "Registered user"}
           </li>
         </ul>
       </div>
@@ -65,10 +65,10 @@ const Dashboard = () => {
 
   const purchaseHistory = (history) => {
     return (
-      <div className='card mb-5'>
-        <h3 className='card-header'>Purchase history</h3>
-        <ul className='list-group'>
-          <li className='list-group-item'>
+      <div className="card mb-5">
+        <h3 className="card-header">Purchase history</h3>
+        <ul className="list-group">
+          <li className="list-group-item">
             {history.map((h, i) => {
               return (
                 <div>
@@ -92,14 +92,10 @@ const Dashboard = () => {
   };
 
   return (
-    <Layout
-      title='Dashboard'
-      description={`${name}`}
-      className='container-fluid'
-    >
-      <div className='row'>
-        <div className='col-md-3'>{userLinks()}</div>
-        <div className='col-md-9'>
+    <Layout title="Dashboard" description={`${name}`} className="">
+      <div className="flex flex-col md:flex-row items-center justify-center w-full mt-4">
+        <div className="col-md-9">
+          <div className=" mb-4">{userLinks()}</div>
           {userInfo()}
           {purchaseHistory(history)}
         </div>

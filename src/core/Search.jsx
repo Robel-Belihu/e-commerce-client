@@ -117,7 +117,7 @@ const Search = () => {
     return (
       <form
         onSubmit={searchSubmit}
-        className="flex flex-col md:flex-row items-center justify-center mt-4"
+        className="flex flex-col md:flex-row items-center justify-center"
       >
         <div className="flex items-center flex-wrap bg-white rounded-lg shadow-md p-2 space-y-2 md:space-y-0 md:space-x-4">
           <FormControl className="w-full md:w-auto">

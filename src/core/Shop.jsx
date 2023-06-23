@@ -124,8 +124,8 @@ const Shop = () => {
       className="container-fluid"
     >
       <Search />
-      <div className="flex">
-        <div className="w-1/4">
+      <div className="flex  ">
+        <div className="flex md:flex-col w-1/4">
           <h4>Filter by categories</h4>
           <ul>
             <Checkbox
@@ -152,7 +152,7 @@ const Shop = () => {
               </div>
             ))}
           </div>
-          <hr />
+          <hr className="mt-4" />
           {loadMoreButton()}
         </div>
       </div>
